@@ -1,0 +1,68 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "ch_pump": {
+        "default": "mdi:pump"
+      },
+      "dhw_pump": {
+        "default": "mdi:pump"
+      },
+      "dhw_recirculation_pump": {
+        "default": "mdi:pump"
+      },
+      "flame": {
+        "default": "mdi:fire-off",
+        "state": {
+          "on": "mdi:fire"
+        }
+      },
+      "gas_valve": {
+        "default": "mdi:valve-closed",
+        "state": {
+          "on": "mdi:valve-open"
+        }
+      },
+      "room_thermostat_1_demand": {
+        "default": "mdi:thermostat"
+      },
+      "room_thermostat_2_demand": {
+        "default": "mdi:thermostat"
+      },
+      "system_pump": {
+        "default": "mdi:pump"
+      },
+      "tank_thermostat_demand": {
+        "default": "mdi:water-boiler"
+      }
+    },
+    "sensor": {
+      "blocking": {
+        "default": "mdi:block-helper"
+      },
+      "blocking_code": {
+        "default": "mdi:numeric"
+      },
+      "firing_rate": {
+        "default": "mdi:fire"
+      },
+      "lockout_code": {
+        "default": "mdi:numeric"
+      },
+      "lockout_reason": {
+        "default": "mdi:alert-octagon"
+      },
+      "pump_speed": {
+        "default": "mdi:pump"
+      },
+      "status": {
+        "default": "mdi:water-boiler"
+      },
+      "status_code": {
+        "default": "mdi:numeric"
+      },
+      "system_pump_speed": {
+        "default": "mdi:pump"
+      }
+    }
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "host": "[%key:common::config_flow::data::host%]",
+          "port": "[%key:common::config_flow::data::port%]",
+          "unit_id": "Modbus unit ID",
+          "temperature_unit": "Temperature unit"
+        },
+        "data_description": {
+          "host": "The Modbus TCP gateway the boiler's communication board is wired to.",
+          "port": "The gateway's TCP port for this boiler.",
+          "unit_id": "The communication board's Modbus address, set by its DIP switches 1-8. Defaults to 1.",
+          "temperature_unit": "The unit the boiler's display is set to. The boiler sends temperatures in that unit."
+        },
+        "description": "Connect to a Lochinvar boiler or water heater with a MODB-I-O Modbus communication board, through a Modbus TCP gateway."
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "air_pressure_switch": {
+        "name": "Air pressure switch"
+      },
+      "alarm_contacts": {
+        "name": "Alarm contacts"
+      },
+      "auto_reset_high_limit": {
+        "name": "Auto reset high limit"
+      },
+      "blocked_drain_switch": {
+        "name": "Blocked drain switch"
+      },
+      "ch_pump": {
+        "name": "CH pump"
+      },
+      "dhw_pump": {
+        "name": "DHW pump"
+      },
+      "dhw_recirculation_pump": {
+        "name": "DHW recirculation pump"
+      },
+      "flame": {
+        "name": "Flame"
+      },
+      "flow_switch": {
+        "name": "Flow switch"
+      },
+      "gas_pressure_switch": {
+        "name": "Gas pressure switch"
+      },
+      "gas_valve": {
+        "name": "Gas valve"
+      },
+      "lockout": {
+        "name": "Lockout"
+      },
+      "louver_proving_switch": {
+        "name": "Louver proving switch"
+      },
+      "louver_relay": {
+        "name": "Louver relay"
+      },
+      "room_thermostat_1_demand": {
+        "name": "Room thermostat 1 demand"
+      },
+      "room_thermostat_2_demand": {
+        "name": "Room thermostat 2 demand"
+      },
+      "run_time_contacts": {
+        "name": "Run-time contacts"
+      },
+      "system_pump": {
+        "name": "System pump"
+      },
+      "tank_thermostat_demand": {
+        "name": "Tank thermostat demand"
+      }
+    },
+    "sensor": {
+      "blocking": {
+        "name": "Blocking",
+        "state": {
+          "anti_cycling": "Anti-cycling",
+          "cascade_communication": "Cascade communication",
+          "fan_limited_high_delta_t": "Fan limited high delta T",
+          "fan_limited_high_flue_temperature": "Fan limited high flue temperature",
+          "fan_limited_high_outlet_temperature": "Fan limited high outlet temperature",
+          "fan_minimum_raised_low_flame_current": "Fan minimum raised low flame current",
+          "general": "General",
+          "heating_blocked": "Heating blocked",
+          "high_delta_t": "High delta T",
+          "high_flue_temperature": "High flue temperature",
+          "high_outlet_temperature": "High outlet temperature",
+          "hot_water_fan_problem": "Hot water fan problem",
+          "hot_water_high_outlet_temperature": "Hot water high outlet temperature",
+          "low_24vac": "Low 24 VAC",
+          "manual_reset_high_limit_open": "Manual reset high limit open",
+          "no_system_sensor": "No system sensor",
+          "none": "None",
+          "service": "Service",
+          "switched_off": "Switched off"
+        }
+      },
+      "blocking_code": {
+        "name": "Blocking code"
+      },
+      "bms_command": {
+        "name": "BMS command"
+      },
+      "bms_configuration": {
+        "name": "BMS configuration"
+      },
+      "cascade_current_power": {
+        "name": "Cascade current power"
+      },
+      "cascade_total_power": {
+        "name": "Cascade total power"
+      },
+      "dhw_recirculation_temperature": {
+        "name": "DHW recirculation temperature"
+      },
+      "firing_rate": {
+        "name": "Firing rate"
+      },
+      "flue_temperature": {
+        "name": "Flue temperature"
+      },
+      "inlet_temperature": {
+        "name": "Inlet temperature"
+      },
+      "lockout_code": {
+        "name": "Lockout code"
+      },
+      "lockout_reason": {
+        "name": "Lockout reason",
+        "state": {
+          "air_pressure_switch_and_fan": "Air pressure switch and fan",
+          "air_pressure_switch_not_closed": "Air pressure switch not closed",
+          "air_pressure_switch_not_open": "Air pressure switch not open",
+          "auto_reset_high_limit": "Auto reset high limit",
+          "blocked_drain": "Blocked drain",
+          "eeprom_crc_failed": "EEPROM CRC failed",
+          "eeprom_programmed": "EEPROM programmed",
+          "eeprom_programming_error": "EEPROM programming error",
+          "eeprom_write_error": "EEPROM write error",
+          "fan_high": "Fan high",
+          "fan_low": "Fan low",
+          "flame_out_of_sequence": "Flame out of sequence",
+          "flow_switch": "Flow switch",
+          "flue_sensor_open": "Flue sensor open",
+          "flue_sensor_short": "Flue sensor short",
+          "gas_pressure_switch": "Gas pressure switch",
+          "gas_valve_relay_test_failed": "Gas valve relay test failed",
+          "inlet_sensor_open": "Inlet sensor open",
+          "inlet_sensor_short": "Inlet sensor short",
+          "louver_proving": "Louver proving",
+          "manual_reset_high_limit": "Manual reset high limit",
+          "no_flame_after_ignition": "No flame after ignition",
+          "no_flame_while_running": "No flame while running",
+          "no_reset_allowed": "No reset allowed",
+          "outlet_sensor_open": "Outlet sensor open",
+          "outlet_sensor_short": "Outlet sensor short",
+          "parameters_not_programmed": "Parameters not programmed",
+          "watchdog": "Watchdog"
+        }
+      },
+      "outdoor_temperature": {
+        "name": "Outdoor temperature"
+      },
+      "outlet_setpoint": {
+        "name": "Outlet setpoint"
+      },
+      "outlet_temperature": {
+        "name": "Outlet temperature"
+      },
+      "pump_speed": {
+        "name": "Pump speed"
+      },
+      "rate_command": {
+        "name": "Rate command"
+      },
+      "status": {
+        "name": "Status",
+        "state": {
+          "blocked_high_delta_t": "Blocked: high delta T",
+          "blocked_high_flue_temperature": "Blocked: high flue temperature",
+          "blocked_high_outlet_temperature": "Blocked: high outlet temperature",
+          "blocked_low_24vac": "Blocked: low 24 VAC",
+          "burner_shut_down_manually": "Burner shut down manually",
+          "cascade_communication_fault": "Cascade communication fault",
+          "freeze_protection": "Freeze protection",
+          "heat_demand_bms": "Heating (BMS)",
+          "heat_demand_cascade": "Heating (cascade)",
+          "heat_demand_thermostat": "Heating (thermostat)",
+          "heating_pump_delay": "Heating pump delay",
+          "hot_water": "Hot water",
+          "hot_water_blocked_no_tank_sensor": "Hot water blocked: no tank sensor",
+          "hot_water_pump_delay": "Hot water pump delay",
+          "idle": "Idle",
+          "lockout": "Lockout",
+          "outdoor_shutdown": "Outdoor shutdown",
+          "service": "Service",
+          "switched_off": "Switched off",
+          "updating": "Updating"
+        }
+      },
+      "status_code": {
+        "name": "Status code"
+      },
+      "system_pump_speed": {
+        "name": "System pump speed"
+      },
+      "system_setpoint": {
+        "name": "System setpoint"
+      },
+      "system_supply_temperature": {
+        "name": "System supply temperature"
+      },
+      "tank_setpoint": {
+        "name": "Tank setpoint"
+      },
+      "tank_temperature": {
+        "name": "Tank temperature"
+      }
+    }
+  },
+  "exceptions": {
+    "modbus_error": {
+      "message": "Could not reach the boiler: {error}"
+    },
+    "no_component_answered": {
+      "message": "The boiler did not answer any register block"
+    }
+  }
+}
