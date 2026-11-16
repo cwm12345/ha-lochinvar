@@ -16,6 +16,24 @@ library vendored in.
 Requires Home Assistant 2026.10 or newer (the `modbus` integration's shared
 connections and modbus-connection 4.12+).
 
+## Installation
+
+**With HACS** (recommended, so you're told about updates):
+
+1. In Home Assistant, open **HACS**, then the **⋮** menu (top right) →
+   **Custom repositories**.
+2. Repository: `https://github.com/cwm12345/ha-lochinvar`, type:
+   **Integration**. Click **Add**.
+3. Search HACS for **Lochinvar**, open it and click **Download**.
+4. Restart Home Assistant.
+
+**Manually:** copy the `custom_components/lochinvar` folder from this
+repository into your Home Assistant `config/custom_components/` folder (create
+`custom_components` if it doesn't exist), then restart Home Assistant.
+
+You don't need to install the `lochinvar-modbus` library separately; a copy is
+included in `custom_components/lochinvar`.
+
 ## Setup
 
 Settings → Devices & services → Add integration → Lochinvar, then give:
