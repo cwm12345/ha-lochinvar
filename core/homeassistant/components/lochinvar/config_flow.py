@@ -12,11 +12,19 @@ from modbus_connection import ModbusError, ModbusTcpParams
 import voluptuous as vol
 
 from homeassistant.components.modbus import async_get_temporary_unit
-from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
+from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlow,
+)
 from homeassistant.const import CONF_HOST, CONF_PORT
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.selector import (
+    EntitySelector,
+    EntitySelectorConfig,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
@@ -28,6 +36,7 @@ from homeassistant.helpers.selector import (
 
 from . import unique_id_for
 from .const import (
+    CONF_OUTDOOR_TEMPERATURE_SOURCE,
     CONF_TEMPERATURE_UNIT,
     CONF_UNIT_ID,
     DEFAULT_NAME,
@@ -81,6 +90,12 @@ class LochinvarConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
+    @staticmethod
+    @callback
+    def async_get_options_flow(_config_entry: ConfigEntry) -> LochinvarOptionsFlow:
+        """Return the options flow."""
+        return LochinvarOptionsFlow()
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
@@ -112,4 +127,32 @@ class LochinvarConfigFlow(ConfigFlow, domain=DOMAIN):
                 STEP_USER_DATA_SCHEMA, user_input
             ),
             errors=errors,
+        )
+
+
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Optional(CONF_OUTDOOR_TEMPERATURE_SOURCE): EntitySelector(
+            EntitySelectorConfig(
+                domain="sensor", device_class=SensorDeviceClass.TEMPERATURE
+            )
+        ),
+    }
+)
+
+
+class LochinvarOptionsFlow(OptionsFlow):
+    """Choose a sensor to feed the boiler as its outdoor temperature."""
+
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Pick the outdoor temperature source, or leave it empty for none."""
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+        return self.async_show_form(
+            step_id="init",
+            data_schema=self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.config_entry.options
+            ),
         )

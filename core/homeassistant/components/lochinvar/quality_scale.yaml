@@ -28,11 +28,9 @@ rules:
   # Silver
   action-exceptions:
     status: exempt
-    comment: This integration is read-only and provides no actions.
+    comment: This integration provides no actions.
   config-entry-unloading: done
-  docs-configuration-parameters:
-    status: exempt
-    comment: This integration does not provide an options flow.
+  docs-configuration-parameters: todo
   docs-installation-parameters: todo
   entity-unavailable: done
   integration-owner: todo

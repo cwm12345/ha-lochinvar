@@ -103,6 +103,13 @@ BINARY_SENSOR_DESCRIPTIONS: tuple[LochinvarBinarySensorDescription, ...] = (
         device_class=BinarySensorDeviceClass.PROBLEM,
         value_fn=lambda d: d.status.locked_out,
     ),
+    LochinvarBinarySensorDescription(
+        key="outdoor_temperature_fed",
+        translation_key="outdoor_temperature_fed",
+        component="bms",
+        entity_category=_DIAGNOSTIC,
+        value_fn=lambda d: d.bms.outdoor_temperature_fed,
+    ),
 )
 
 

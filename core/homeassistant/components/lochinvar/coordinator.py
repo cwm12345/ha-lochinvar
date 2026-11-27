@@ -6,8 +6,12 @@ from __future__ import annotations
 
 from datetime import timedelta
 import logging
+from typing import TYPE_CHECKING
 
 from lochinvar_modbus import LochinvarBoiler
+
+if TYPE_CHECKING:
+    from .outdoor_feed import OutdoorTemperatureFeed
 from modbus_connection import ModbusError
 from modbus_connection.model import UpdateReport
 
@@ -40,6 +44,7 @@ class LochinvarCoordinator(DataUpdateCoordinator[UpdateReport]):
             update_interval=timedelta(seconds=SCAN_INTERVAL),
         )
         self.device = device
+        self.outdoor_feed: OutdoorTemperatureFeed | None = None
         self._failed: frozenset[str] = frozenset()
         # The board reports no serial number; the config entry is its identity.
         self.device_info = DeviceInfo(
