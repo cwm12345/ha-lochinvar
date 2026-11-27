@@ -16,6 +16,15 @@ library vendored in.
 Requires Home Assistant 2026.10 or newer (the `modbus` integration's shared
 connections and modbus-connection 4.12+).
 
+## No MODB-I-O board?
+
+Most of these boilers also have a square **PC Connection** USB port on the
+SMART SYSTEM display. [KB1RMA/lochinvar-native-modbus](https://github.com/KB1RMA/lochinvar-native-modbus)
+reads that port instead, with no add-on board: ESPHome on an ESP32-S3, or a
+Docker container over MQTT. It reads the display's own register set, which is
+different from and much larger than the MODB-I-O board's, so the two projects
+don't share register numbers. It is read-only too.
+
 ## Installation
 
 **With HACS** (recommended, so you're told about updates):
