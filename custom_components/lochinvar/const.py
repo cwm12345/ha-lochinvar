@@ -16,6 +16,6 @@ DEFAULT_UNIT_ID = 1
 SCAN_INTERVAL = 30
 
 CONF_OUTDOOR_TEMPERATURE_SOURCE = "outdoor_temperature_source"
-FEED_INTERVAL = 3
-"""Seconds between outdoor temperature writes. The boiler drops a fed value it
-hasn't seen for its ModBus timeout, 10 s by default (5-120 s)."""
+FEED_INTERVAL = 30
+"""Seconds between outdoor temperature writes. The manual asks for a refresh
+at least every 4 minutes; a live boiler kept an unrefreshed value 5 min 10 s."""

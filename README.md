@@ -64,20 +64,21 @@ If the boiler's own outdoor sensor reads wrong, for example because it sits in
 sun, its outdoor reset and warm-weather shutdown follow the wrong number.
 Under the integration's **Configure** options, pick any Home Assistant
 temperature sensor as the **Outdoor temperature source**. The integration then
-writes that sensor's value into the boiler every 3 seconds in place of its
+writes that sensor's value into the boiler every 30 seconds in place of its
 outdoor sensor.
 
 - The boiler needs ModBus/BACnet set to **ACTIVE** in its installer menu
   (Control Modes).
 - It fails safe. If the source has no usable value, the integration hands the
-  outdoor temperature back to the boiler's sensor. If Home Assistant or the
-  link stops, the boiler does that itself within its ModBus timeout (10 s by
-  default).
+  outdoor temperature back to the boiler's sensor at once. If Home Assistant
+  or the link stops, the boiler keeps the last value for about 5 minutes
+  (measured: 5 min 10 s), then goes back to its own sensor. Its 10 s ModBus
+  timeout doesn't apply to the outdoor value.
 - While fed, the **Outdoor temperature** sensor shows the fed value. The
   board has no other register for its own sensor.
-- In Fahrenheit, values under 32 °F are written as 32 °F. The board's encoding
-  below freezing hasn't been checked for writes, and a reset curve is normally
-  at its cap long before then.
+- In Fahrenheit, values under 32 °F are written as 32 °F. Tested on a live
+  boiler: a fed value below freezing makes it drop its space-heat demand. A
+  reset curve is at its cap long before 32 °F, so this changes nothing.
 - Clear the option to stop feeding.
 
 ## Up front

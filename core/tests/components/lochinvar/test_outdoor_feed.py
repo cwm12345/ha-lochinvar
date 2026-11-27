@@ -51,7 +51,7 @@ def mock_config_entry() -> MockConfigEntry:
 
 
 async def _tick(
-    hass: HomeAssistant, freezer: FrozenDateTimeFactory, seconds: int = 3
+    hass: HomeAssistant, freezer: FrozenDateTimeFactory, seconds: int = 30
 ) -> None:
     freezer.tick(timedelta(seconds=seconds))
     async_fire_time_changed(hass)
@@ -76,7 +76,7 @@ async def test_feeds_the_source_every_few_seconds(
     assert unit.holding[5] == 430
 
     # The next poll sees the boiler using the fed value.
-    await _tick(hass, freezer, 30)
+    await _tick(hass, freezer)
     assert hass.states.get(FED).state == STATE_ON
     assert hass.states.get(OUTDOOR).state == "43.0"
 

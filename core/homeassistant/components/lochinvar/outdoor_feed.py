@@ -32,8 +32,8 @@ _HA_UNIT = {
 }
 
 # What gets written, clamped to what the library will encode. Fahrenheit stops
-# at 32 F: sub-zero writes are unverified, and a reset curve is at its cap
-# long before then, so the boiler behaves the same.
+# at 32 F: a live boiler fed anything under 0 C dropped its space-heat demand,
+# and a reset curve is at its cap long before then, so 32 behaves the same.
 _CLAMP = {
     TemperatureUnit.FAHRENHEIT: (32.0, 140.0),
     TemperatureUnit.CELSIUS: (-40.0, 60.0),
@@ -44,10 +44,10 @@ class OutdoorTemperatureFeed:
     """Write a sensor's temperature into the boiler in place of its outdoor sensor.
 
     For a boiler whose own outdoor sensor reads wrong, typically because it
-    sits in sun. The boiler keeps the fed value only while it's refreshed
-    within its ModBus timeout, so this writes every few seconds. When the
-    source has no usable value, or this stops, the boiler goes back to its own
-    sensor.
+    sits in sun. This writes every FEED_INTERVAL seconds. When the source has
+    no usable value, or the feed is stopped, it hands the outdoor temperature
+    back to the boiler's sensor at once. If Home Assistant itself stops, the
+    boiler keeps the last value for about 5 minutes, then goes back on its own.
     """
 
     def __init__(
@@ -144,7 +144,7 @@ class OutdoorTemperatureFeed:
         except ModbusError as err:
             _LOGGER.warning(
                 "%s: %s, and releasing the outdoor temperature failed (%s); the"
-                " boiler falls back to its own sensor at its ModBus timeout",
+                " boiler falls back to its own sensor in about 5 minutes",
                 self.coordinator.name,
                 why,
                 err,

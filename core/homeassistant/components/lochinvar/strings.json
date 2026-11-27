@@ -31,7 +31,7 @@
           "outdoor_temperature_source": "Outdoor temperature source"
         },
         "data_description": {
-          "outdoor_temperature_source": "A temperature sensor to use as the boiler's outdoor temperature, written every few seconds in place of its own outdoor sensor. Leave empty to use the boiler's sensor. Needs ModBus/BACnet set to ACTIVE in the boiler's installer menu. If the sensor has no value, or Home Assistant stops, the boiler goes back to its own sensor within its ModBus timeout. While fed, the Outdoor temperature sensor shows the fed value."
+          "outdoor_temperature_source": "A temperature sensor to use as the boiler's outdoor temperature, written every 30 seconds in place of its own outdoor sensor. Leave empty to use the boiler's sensor. Needs ModBus/BACnet set to ACTIVE in the boiler's installer menu. If the sensor has no value, the boiler goes straight back to its own sensor; if Home Assistant stops, it does so after about 5 minutes. Values under 32 °F are sent as 32 °F. While fed, the Outdoor temperature sensor shows the fed value."
         },
         "description": "Feed the boiler an outdoor temperature, for an outdoor sensor that reads wrong, for example in sun."
       }
