@@ -82,6 +82,29 @@ outdoor sensor.
   curve is at its cap long before 32 °F, so the clamp changes nothing.
 - Clear the option to stop feeding.
 
+### Fahrenheit boilers only, for now
+
+Everything above was worked out and tested on a boiler whose display is set
+to **Fahrenheit**:
+
+- the 32 °F floor;
+- why a fed value below freezing trips warm-weather shutdown;
+- the ~5 minute fallback;
+- the 0.1 °F units.
+
+A Fahrenheit boiler converts each value we write from °F to °C itself, and
+that conversion breaks below freezing (details in the
+[lochinvar-modbus README](https://github.com/cwm12345/lochinvar-modbus#writes-the-outdoor-temperature-only)).
+
+A boiler set to **Celsius** would work differently. Per the manual, it takes
+signed tenths of a degree C with no conversion. So the freezing limit, and
+whether below-freezing values work at all, would likely differ.
+
+**The integration doesn't handle the Celsius case at this time.** It has a
+Celsius code path (values clamped to -40 to 60 °C), but that path has never
+been run against a Celsius boiler. Don't rely on the feed with one until it
+has been tested.
+
 ## Up front
 
 This was built for one installation and is shared as a starting point. I'm
