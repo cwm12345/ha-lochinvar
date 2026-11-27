@@ -24,6 +24,19 @@
       }
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "outdoor_temperature_source": "Outdoor temperature source"
+        },
+        "data_description": {
+          "outdoor_temperature_source": "A temperature sensor to use as the boiler's outdoor temperature, written every few seconds in place of its own outdoor sensor. Leave empty to use the boiler's sensor. Needs ModBus/BACnet set to ACTIVE in the boiler's installer menu. If the sensor has no value, or Home Assistant stops, the boiler goes back to its own sensor within its ModBus timeout. While fed, the Outdoor temperature sensor shows the fed value."
+        },
+        "description": "Feed the boiler an outdoor temperature, for an outdoor sensor that reads wrong, for example in sun."
+      }
+    }
+  },
   "entity": {
     "binary_sensor": {
       "air_pressure_switch": {
@@ -67,6 +80,9 @@
       },
       "louver_relay": {
         "name": "Louver relay"
+      },
+      "outdoor_temperature_fed": {
+        "name": "Outdoor temperature fed"
       },
       "room_thermostat_1_demand": {
         "name": "Room thermostat 1 demand"

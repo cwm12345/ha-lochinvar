@@ -55,7 +55,30 @@ Settings → Devices & services → Add integration → Lochinvar, then give:
 - **Binary sensors:** flame, gas valve, the pumps, thermostat demands, the
   safety switches, alarm and run-time contacts, and a lockout problem
   sensor. The manual only gives each input as ON/OFF, so the safety switches
-  carry no device class.
+  carry no device class. **Outdoor temperature fed** (diagnostic) says
+  whether the boiler is using a fed outdoor temperature.
+
+## Feeding the outdoor temperature (option)
+
+If the boiler's own outdoor sensor reads wrong, for example because it sits in
+sun, its outdoor reset and warm-weather shutdown follow the wrong number.
+Under the integration's **Configure** options, pick any Home Assistant
+temperature sensor as the **Outdoor temperature source**. The integration then
+writes that sensor's value into the boiler every 3 seconds in place of its
+outdoor sensor.
+
+- The boiler needs ModBus/BACnet set to **ACTIVE** in its installer menu
+  (Control Modes).
+- It fails safe. If the source has no usable value, the integration hands the
+  outdoor temperature back to the boiler's sensor. If Home Assistant or the
+  link stops, the boiler does that itself within its ModBus timeout (10 s by
+  default).
+- While fed, the **Outdoor temperature** sensor shows the fed value. The
+  board has no other register for its own sensor.
+- In Fahrenheit, values under 32 °F are written as 32 °F. The board's encoding
+  below freezing hasn't been checked for writes, and a reset curve is normally
+  at its cap long before then.
+- Clear the option to stop feeding.
 
 ## Up front
 
