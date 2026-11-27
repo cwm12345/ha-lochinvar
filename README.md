@@ -77,8 +77,9 @@ outdoor sensor.
 - While fed, the **Outdoor temperature** sensor shows the fed value. The
   board has no other register for its own sensor.
 - In Fahrenheit, values under 32 °F are written as 32 °F. Tested on a live
-  boiler: a fed value below freezing makes it drop its space-heat demand. A
-  reset curve is at its cap long before 32 °F, so this changes nothing.
+  boiler: it reads a fed value below freezing as hot and goes into
+  warm-weather shutdown (its own sensor is fine below freezing). A reset
+  curve is at its cap long before 32 °F, so the clamp changes nothing.
 - Clear the option to stop feeding.
 
 ## Up front
